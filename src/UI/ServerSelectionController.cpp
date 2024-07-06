@@ -9,7 +9,7 @@
 #include "UnityEngine/RectTransform.hpp"
 #include "HMUI/CurvedCanvasSettings.hpp"
 
-#include "Polyglot/Localization.hpp"
+#include "BGLib/Polyglot/Localization.hpp"
 
 #include "multiplayer-core/shared/MultiplayerCore.hpp"
 
@@ -43,7 +43,7 @@ namespace BeatTogether::UI {
     }
 
     void ServerSelectionController::Initialize() {
-        _screen = BSML::FloatingScreen::CreateFloatingScreen({90, 90}, false, {0, 3, 4.35f}, {});
+        _screen = BSML::FloatingScreen::CreateFloatingScreen({90, 90}, false, {0, 3, 4.35f}, UnityEngine::Quaternion::get_identity());
         BSML::parse_and_construct(Assets::ServerSelectionController_bsml, _screen->get_transform(), this);
         serverList->transform->GetChild(1).cast<UnityEngine::RectTransform>()->sizeDelta = {60, 0};
         _screen->GetComponent<HMUI::CurvedCanvasSettings*>()->SetRadius(140);
@@ -109,10 +109,10 @@ namespace BeatTogether::UI {
     }
 
     void ServerSelectionController::SetTitle(StringW& value, StringW title) {
-        if (Polyglot::Localization::Get("LABEL_CHECKING_SERVER_STATUS") == value) {
-            value = Polyglot::Localization::Get("LABEL_MULTIPLAYER_MODE_SELECTION");
+        if (BGLib::Polyglot::Localization::Get("LABEL_CHECKING_SERVER_STATUS") == value) {
+            value = BGLib::Polyglot::Localization::Get("LABEL_MULTIPLAYER_MODE_SELECTION");
         }
-        if (title == Polyglot::Localization::Get("LABEL_CHECKING_SERVER_STATUS") && value == "")
+        if (title == BGLib::Polyglot::Localization::Get("LABEL_CHECKING_SERVER_STATUS") && value == "")
             SetInteraction(true);
     }
 
